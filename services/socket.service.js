@@ -18,39 +18,61 @@ function setupSocketAPI(server) {
         console.log('A user connected')
 
         socket.on('join', (blockId) => {
-            socket.join(blockId)
-            console.log(`User ${socket.id} joined block ${blockId}`)
+            handleJoin(socket, blockId)
+        })
 
-            // Check if the block already has a mentor
-            if (!mentors[blockId]) {
-                mentors[blockId] = socket.id
-                socket.emit('setRole', 'mentor')
-                console.log(`User ${socket.id} is assigned as the mentor for block ${blockId}`)
-            } else {
-                socket.emit('setRole', 'student')
-                console.log(`User ${socket.id} is assigned as a student for block ${blockId}`)
-            }
-
-            updateUsersCount(blockId)
+        socket.on('codeChange', ({ blockId, code }) => {
+            socket.to(blockId).emit('codeUpdate', code)
         })
 
         socket.on('leave', (blockId) => {
-            socket.leave(blockId)
-
-            if (mentors[blockId] === socket.id) {
-                delete mentors[blockId]
-                console.log(`Mentor ${socket.id} left block ${blockId}`)
-                gIo.to(blockId).emit('mentorLeft')
-                console.log('mentors:', mentors)
-            }
-
-            updateUsersCount(blockId)
+            handleLeave(socket, blockId)
         })
 
-        socket.on('disconnect', () => {
-            console.log('A user disconnected')
+        socket.on('disconnect', (blockId) => {
+            handleDisconnect(socket, blockId)
         })
     })
+}
+
+function handleJoin(socket, blockId) {
+    socket.join(blockId)
+    console.log(`User ${socket.id} joined block ${blockId}`)
+
+    // Check if the block already has a mentor
+    if (!mentors[blockId]) {
+        mentors[blockId] = socket.id
+        socket.emit('setRole', 'mentor')
+        console.log(`User ${socket.id} is assigned as the mentor for block ${blockId}`)
+    } else {
+        socket.emit('setRole', 'student')
+        console.log(`User ${socket.id} is assigned as a student for block ${blockId}`)
+    }
+
+    updateUsersCount(blockId)
+}
+
+function handleLeave(socket, blockId) {
+    socket.leave(blockId)
+
+    if (mentors[blockId] === socket.id) {
+        delete mentors[blockId]
+        console.log(`Mentor ${socket.id} left block ${blockId}`)
+        gIo.to(blockId).emit('mentorLeft')
+    }
+
+    updateUsersCount(blockId)
+}
+
+function handleDisconnect(socket, blockId) {
+    console.log('A user disconnected')
+            for (const blockId in mentors) {
+                if (mentors[blockId] === socket.id) {
+                    delete mentors[blockId]
+                    console.log(`Mentor ${socket.id} left block ${blockId}`)
+                    gIo.to(blockId).emit('mentorLeft')
+                }
+            }
 }
 
 function updateUsersCount(blockId) {

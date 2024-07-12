@@ -1,47 +1,42 @@
 [
-    {
-      "_id": "1",
-      "title": "Find Maximum in Array",
-      "code": "/* Write a function 'findMax' that accepts\n an array of numbers and returns the\n maximum number in the array. */",
-      "initialCode": "/* Write a function 'findMax' that accepts\n an array of numbers and returns the\n maximum number in the array. */",
-      "solution": "function findMax(arr) { return Math.max(...arr); }",
-      "tests": "console.log(findMax([1, 2, 3, 4, 5])); // Expected output: 5\nconsole.log(findMax([-10, -5, 0, 5, 10])); // Expected output: 10",
-      "difficulty": "easy"
-    },
-    {
-      "_id": "2",
-      "title": "Reverse String",
-      "code": "/* Write a function 'reverseString' that accepts\n a string and returns the string reversed. */",
-      "initialCode": "/* Write a function 'reverseString' that accepts\n a string and returns the string reversed. */",
-      "solution": "function reverseString(str) { return str.split('').reverse().join(''); }",
-      "tests": "console.log(reverseString('hello')); // Expected output: 'olleh'\nconsole.log(reverseString('JavaScript')); // Expected output: 'tpircSavaJ'",
-      "difficulty": "easy"
-    },
-    {
-      "_id": "3",
-      "title": "Sum Array",
-      "code": "/* Write a function 'sumArray' that accepts\n an array of numbers and returns the\n sum of all the numbers in the array. */",
-      "initialCode": "/* Write a function 'sumArray' that accepts\n an array of numbers and returns the\n sum of all the numbers in the array. */",
-      "solution": "function sumArray(arr) { return arr.reduce((acc, curr) => acc + curr, 0); }",
-      "tests": "console.log(sumArray([1, 2, 3, 4, 5])); // Expected output: 15\nconsole.log(sumArray([-10, -5, 0, 5, 10])); // Expected output: 0",
-      "difficulty": "easy"
-    },
-    {
-      "_id": "4",
-      "title": "Palindrome Checker",
-      "code": "/* Write a function 'isPalindrome' that accepts\n a string and returns true if the string is a\n palindrome (reads the same forward and backward),\n and false otherwise. */",
-      "initialCode": "/* Write a function 'isPalindrome' that accepts\n a string and returns true if the string is a\n palindrome (reads the same forward and backward),\n and false otherwise. */",
-      "solution": "function isPalindrome(str) { const cleanStr = str.replace(/[^a-zA-Z0-9]/g, '').toLowerCase(); return cleanStr === cleanStr.split('').reverse().join(''); }",
-      "tests": "console.log(isPalindrome('A man, a plan, a canal, Panama')); // Expected output: true\nconsole.log(isPalindrome('hello')); // Expected output: false",
-      "difficulty": "medium"
-    },
-    {
-      "_id": "5",
-      "title": "Factorial Calculation",
-      "code": "/* Write a function 'factorial' that accepts\n a number and returns the factorial of that number.\n The factorial of a non-negative integer n is the\n product of all positive integers less than or equal to n. */",
-      "initialCode": "/* Write a function 'factorial' that accepts\n a number and returns the factorial of that number.\n The factorial of a non-negative integer n is the\n product of all positive integers less than or equal to n. */",
-      "solution": "function factorial(n) { if (n <= 1) return 1; return n * factorial(n - 1); }",
-      "tests": "console.log(factorial(5)); // Expected output: 120\nconsole.log(factorial(0)); // Expected output: 1",
-      "difficulty": "medium"
-    }
+  {
+    "_id": "1",
+    "title": "Find Maximum in Array",
+    "description": "Write a function 'findMax' that accepts an array of numbers and returns the maximum number in the array.",
+    "initialCode": "function findMax(arr) {\n  // Write your code here\n}",
+    "solution": "function findMax(arr) {\n  return Math.max(...arr);\n}",
+    "difficulty": "easy"
+  },
+  {
+    "_id": "2",
+    "title": "Reverse String",
+    "description": "Write a function 'reverseString' that accepts a string and returns the string reversed.",
+    "initialCode": "function reverseString(str) {\n  // Write your code here\n}",
+    "solution": "function reverseString(str) {\n  return str.split('').reverse().join('');\n}",
+    "difficulty": "easy"
+  },
+  {
+    "_id": "3",
+    "title": "Sum Array",
+    "description": "Write a function 'sumArray' that accepts an array of numbers and returns the sum of all the numbers in the array.",
+    "initialCode": "function sumArray(arr) {\n  // Write your code here\n}",
+    "solution": "function sumArray(arr) {\n  return arr.reduce((acc, curr) => acc + curr, 0);\n}",
+    "difficulty": "easy"
+  },
+  {
+    "_id": "4",
+    "title": "Palindrome Checker",
+    "description": "Write a function 'isPalindrome' that accepts a string and returns true if the string is a palindrome (reads the same forward and backward), and false otherwise.",
+    "initialCode": "function isPalindrome(str) {\n  // Write your code here\n}",
+    "solution": "function isPalindrome(str) {\n  const cleanStr = str.replace(/[^a-zA-Z0-9]/g, '').toLowerCase();\n  return cleanStr === cleanStr.split('').reverse().join('');\n}",
+    "difficulty": "medium"
+  },
+  {
+    "_id": "5",
+    "title": "Factorial Calculation",
+    "description": "Write a function 'factorial' that accepts a number and returns the factorial of that number. The factorial of a non-negative integer n is the product of all positive integers less than or equal to n.",
+    "initialCode": "function factorial(n) {\n  // Write your code here\n}",
+    "solution": "function factorial(n) {\n  if (n <= 1) return 1;\n  return n * factorial(n - 1);\n}",
+    "difficulty": "medium"
+  }
 ]
