@@ -8,6 +8,7 @@ export const blockService = {
     getById,
 }
 
+//TODO: Check for pagination needs
 async function query() {
     try {
         const collection = await dbService.getCollection('block')

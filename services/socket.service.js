@@ -29,8 +29,8 @@ function setupSocketAPI(server) {
             handleLeave(socket, blockId)
         })
 
-        socket.on('disconnect', (blockId) => {
-            handleDisconnect(socket, blockId)
+        socket.on('disconnect', () => {
+            console.log('A user disconnected')
         })
     })
 }
@@ -64,19 +64,20 @@ function handleLeave(socket, blockId) {
     updateUsersCount(blockId)
 }
 
-function handleDisconnect(socket) {
-    console.log('A user disconnected')
-            for (const blockId in mentors) {
-                if (mentors[blockId] === socket.id) {
-                    delete mentors[blockId]
-                    console.log(`Mentor ${socket.id} left block ${blockId}`)
-                    gIo.to(blockId).emit('mentorLeft')
-                }
-            }
-}
-
 function updateUsersCount(blockId) {
     const room = gIo.sockets.adapter.rooms.get(blockId)
     const usersCount = room ? room.size : 0
     gIo.to(blockId).emit('updateUsers', usersCount)
+}
+
+//TODO: Check if needed
+function handleDisconnect(socket) {
+
+    for (const blockId in mentors) {
+        if (mentors[blockId] === socket.id) {
+            delete mentors[blockId]
+            console.log(`Mentor ${socket.id} left block ${blockId}`)
+            gIo.to(blockId).emit('mentorLeft')
+        }
+    }
 }
