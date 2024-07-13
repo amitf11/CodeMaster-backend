@@ -64,7 +64,7 @@ function handleLeave(socket, blockId) {
     updateUsersCount(blockId)
 }
 
-function handleDisconnect(socket, blockId) {
+function handleDisconnect(socket) {
     console.log('A user disconnected')
             for (const blockId in mentors) {
                 if (mentors[blockId] === socket.id) {
