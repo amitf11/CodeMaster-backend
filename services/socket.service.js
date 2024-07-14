@@ -25,12 +25,16 @@ function setupSocketAPI(server) {
             socket.to(blockId).emit('codeUpdate', code)
         })
 
+        socket.on('challengeSuccess', (blockId) => {
+            socket.to(mentors[blockId]).emit('studentSuccess')
+        })
+
         socket.on('leave', (blockId) => {
             handleLeave(socket, blockId)
         })
 
-        socket.on('disconnect', () => {
-            console.log('A user disconnected')
+        socket.on('disconnect', (blockId) => {
+            handleDisconnect(socket, blockId)
         })
     })
 }
@@ -38,7 +42,7 @@ function setupSocketAPI(server) {
 function handleJoin(socket, blockId) {
     socket.join(blockId)
     console.log(`User ${socket.id} joined block ${blockId}`)
-
+    console.log('mentors:', mentors)
     // Check if the block already has a mentor
     if (!mentors[blockId]) {
         mentors[blockId] = socket.id
@@ -64,14 +68,8 @@ function handleLeave(socket, blockId) {
     updateUsersCount(blockId)
 }
 
-function updateUsersCount(blockId) {
-    const room = gIo.sockets.adapter.rooms.get(blockId)
-    const usersCount = room ? room.size : 0
-    gIo.to(blockId).emit('updateUsers', usersCount)
-}
-
-//TODO: Check if needed
-function handleDisconnect(socket) {
+function handleDisconnect(socket, blockId) {
+    socket.leave(blockId)
 
     for (const blockId in mentors) {
         if (mentors[blockId] === socket.id) {
@@ -80,4 +78,10 @@ function handleDisconnect(socket) {
             gIo.to(blockId).emit('mentorLeft')
         }
     }
+}
+
+function updateUsersCount(blockId) {
+    const room = gIo.sockets.adapter.rooms.get(blockId)
+    const usersCount = room ? room.size : 0
+    gIo.to(blockId).emit('updateUsers', usersCount)
 }

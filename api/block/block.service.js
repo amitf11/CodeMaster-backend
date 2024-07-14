@@ -8,11 +8,11 @@ export const blockService = {
     getById,
 }
 
-//TODO: Check for pagination needs
+
 async function query() {
     try {
         const collection = await dbService.getCollection('block')
-        const blocks = await collection.find({}).toArray()
+        const blocks = await collection.find().sort({ difficulty: 1 }).toArray()
         return blocks
     } catch (error) {
         console.log('Had trouble finding blocks', error)
