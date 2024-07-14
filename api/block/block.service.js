@@ -12,7 +12,7 @@ export const blockService = {
 async function query() {
     try {
         const collection = await dbService.getCollection('block')
-        const blocks = await collection.find().sort({ difficulty: 1 }).toArray()
+        const blocks = await collection.find().sort({ _id: 1 }).toArray()
         return blocks
     } catch (error) {
         console.log('Had trouble finding blocks', error)
