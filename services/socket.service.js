@@ -42,7 +42,7 @@ function setupSocketAPI(server) {
 function handleJoin(socket, blockId) {
     socket.join(blockId)
     console.log(`User ${socket.id} joined block ${blockId}`)
-    console.log('mentors:', mentors)
+
     // Check if the block already has a mentor
     if (!mentors[blockId]) {
         mentors[blockId] = socket.id
