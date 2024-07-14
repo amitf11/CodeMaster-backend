@@ -29,6 +29,10 @@ function setupSocketAPI(server) {
             socket.to(mentors[blockId]).emit('studentSuccess')
         })
 
+        socket.on('invite', ({ blockId }) => {
+            socket.broadcast.emit('invite', { blockId })
+        })
+
         socket.on('leave', (blockId) => {
             handleLeave(socket, blockId)
         })
