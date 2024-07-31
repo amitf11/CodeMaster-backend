@@ -31,10 +31,9 @@ if (process.env.NODE_ENV === 'production') {
 app.use('/api/blocks', blockRoutes)
 socketService.setupSocketAPI(server)
 
-//TODO: Un-comment after build
-// app.get('/**', (req, res) => { 
-//     res.sendFile(path.resolve('public/index.html'))
-//   })
+app.get('/**', (req, res) => { 
+    res.sendFile(path.resolve('public/index.html'))
+  })
 
 const port = process.env.PORT || 3030
 server.listen(port, () => {
